@@ -1,0 +1,58 @@
+﻿@model WebHmoney.Models.Cuentas
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Cuentas</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NombreCuenta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NombreCuenta)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TipoCuenta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TipoCuenta)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Moneda)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Moneda)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BalanceInicial)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BalanceInicial)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InformacionUsuario.NombreCompleto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InformacionUsuario.NombreCompleto)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

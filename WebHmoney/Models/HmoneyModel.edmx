@@ -1,0 +1,282 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="HmoneyModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="HmoneyModelStoreContainer">
+    <EntitySet Name="Cuentas" EntityType="HmoneyModel.Store.Cuentas" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="InformacionUsuarios" EntityType="HmoneyModel.Store.InformacionUsuarios" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Movimientos" EntityType="HmoneyModel.Store.Movimientos" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TipoGastos" EntityType="HmoneyModel.Store.TipoGastos" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="InformacionUsuarioCuentas" Association="HmoneyModel.Store.InformacionUsuarioCuentas">
+      <End Role="InformacionUsuario" EntitySet="InformacionUsuarios" />
+      <End Role="Cuentas" EntitySet="Cuentas" />
+    </AssociationSet>
+    <AssociationSet Name="CuentasMovimiento" Association="HmoneyModel.Store.CuentasMovimiento">
+      <End Role="Cuentas" EntitySet="Cuentas" />
+      <End Role="Movimiento" EntitySet="Movimientos" />
+    </AssociationSet>
+    <AssociationSet Name="TipoGastoMovimiento" Association="HmoneyModel.Store.TipoGastoMovimiento">
+      <End Role="TipoGasto" EntitySet="TipoGastos" />
+      <End Role="Movimiento" EntitySet="Movimientos" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Cuentas">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NombreCuenta" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="TipoCuenta" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Moneda" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="BalanceInicial" Type="decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="InformacionUsuarioId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="InformacionUsuarios">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NombreCompleto" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Telefono" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="EsActivo" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Movimientos">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Fecha" Type="datetime" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Monto" Type="decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="CuentasId" Type="int" Nullable="false" />
+    <Property Name="TipoGastoId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TipoGastos">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="EsActivo" Type="bit" Nullable="false" />
+  </EntityType>
+  <Association Name="InformacionUsuarioCuentas">
+    <End Role="InformacionUsuario" Type="HmoneyModel.Store.InformacionUsuarios" Multiplicity="1" />
+    <End Role="Cuentas" Type="HmoneyModel.Store.Cuentas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InformacionUsuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Cuentas">
+        <PropertyRef Name="InformacionUsuarioId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CuentasMovimiento">
+    <End Role="Cuentas" Type="HmoneyModel.Store.Cuentas" Multiplicity="1" />
+    <End Role="Movimiento" Type="HmoneyModel.Store.Movimientos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cuentas">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Movimiento">
+        <PropertyRef Name="CuentasId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TipoGastoMovimiento">
+    <End Role="TipoGasto" Type="HmoneyModel.Store.TipoGastos" Multiplicity="1" />
+    <End Role="Movimiento" Type="HmoneyModel.Store.Movimientos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoGasto">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Movimiento">
+        <PropertyRef Name="TipoGastoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="HmoneyModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="HmoneyModelContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Cuentas" EntityType="HmoneyModel.Cuentas" />
+          <EntitySet Name="InformacionUsuarios" EntityType="HmoneyModel.InformacionUsuario" />
+          <EntitySet Name="Movimientos" EntityType="HmoneyModel.Movimiento" />
+          <EntitySet Name="TipoGastos" EntityType="HmoneyModel.TipoGasto" />
+          <AssociationSet Name="InformacionUsuarioCuentas" Association="HmoneyModel.InformacionUsuarioCuentas">
+            <End Role="InformacionUsuario" EntitySet="InformacionUsuarios" />
+            <End Role="Cuentas" EntitySet="Cuentas" />
+          </AssociationSet>
+          <AssociationSet Name="CuentasMovimiento" Association="HmoneyModel.CuentasMovimiento">
+            <End Role="Cuentas" EntitySet="Cuentas" />
+            <End Role="Movimiento" EntitySet="Movimientos" />
+          </AssociationSet>
+          <AssociationSet Name="TipoGastoMovimiento" Association="HmoneyModel.TipoGastoMovimiento">
+            <End Role="TipoGasto" EntitySet="TipoGastos" />
+            <End Role="Movimiento" EntitySet="Movimientos" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Cuentas">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreCuenta" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="TipoCuenta" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Moneda" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="BalanceInicial" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <NavigationProperty Name="InformacionUsuario" Relationship="HmoneyModel.InformacionUsuarioCuentas" FromRole="Cuentas" ToRole="InformacionUsuario" />
+          <Property Name="InformacionUsuarioId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Movimientos" Relationship="HmoneyModel.CuentasMovimiento" FromRole="Cuentas" ToRole="Movimiento" />
+        </EntityType>
+        <EntityType Name="InformacionUsuario">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreCompleto" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Telefono" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="EsActivo" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Cuentas" Relationship="HmoneyModel.InformacionUsuarioCuentas" FromRole="InformacionUsuario" ToRole="Cuentas" />
+        </EntityType>
+        <EntityType Name="Movimiento">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Monto" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <NavigationProperty Name="Cuentas" Relationship="HmoneyModel.CuentasMovimiento" FromRole="Movimiento" ToRole="Cuentas" />
+          <Property Name="CuentasId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TipoGasto" Relationship="HmoneyModel.TipoGastoMovimiento" FromRole="Movimiento" ToRole="TipoGasto" />
+          <Property Name="TipoGastoId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoGasto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="EsActivo" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Movimientos" Relationship="HmoneyModel.TipoGastoMovimiento" FromRole="TipoGasto" ToRole="Movimiento" />
+        </EntityType>
+        <Association Name="InformacionUsuarioCuentas">
+          <End Type="HmoneyModel.InformacionUsuario" Role="InformacionUsuario" Multiplicity="1" />
+          <End Type="HmoneyModel.Cuentas" Role="Cuentas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InformacionUsuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cuentas">
+              <PropertyRef Name="InformacionUsuarioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CuentasMovimiento">
+          <End Type="HmoneyModel.Cuentas" Role="Cuentas" Multiplicity="1" />
+          <End Type="HmoneyModel.Movimiento" Role="Movimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cuentas">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Movimiento">
+              <PropertyRef Name="CuentasId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TipoGastoMovimiento">
+          <End Type="HmoneyModel.TipoGasto" Role="TipoGasto" Multiplicity="1" />
+          <End Type="HmoneyModel.Movimiento" Role="Movimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoGasto">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Movimiento">
+              <PropertyRef Name="TipoGastoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="HmoneyModelStoreContainer" CdmEntityContainer="HmoneyModelContainer">
+    <EntitySetMapping Name="Cuentas">
+      <EntityTypeMapping TypeName="IsTypeOf(HmoneyModel.Cuentas)">
+        <MappingFragment StoreEntitySet="Cuentas">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="NombreCuenta" ColumnName="NombreCuenta" />
+          <ScalarProperty Name="TipoCuenta" ColumnName="TipoCuenta" />
+          <ScalarProperty Name="Moneda" ColumnName="Moneda" />
+          <ScalarProperty Name="BalanceInicial" ColumnName="BalanceInicial" />
+          <ScalarProperty Name="InformacionUsuarioId" ColumnName="InformacionUsuarioId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InformacionUsuarios">
+      <EntityTypeMapping TypeName="IsTypeOf(HmoneyModel.InformacionUsuario)">
+        <MappingFragment StoreEntitySet="InformacionUsuarios">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="NombreCompleto" ColumnName="NombreCompleto" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="EsActivo" ColumnName="EsActivo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Movimientos">
+      <EntityTypeMapping TypeName="IsTypeOf(HmoneyModel.Movimiento)">
+        <MappingFragment StoreEntitySet="Movimientos">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Monto" ColumnName="Monto" />
+          <ScalarProperty Name="CuentasId" ColumnName="CuentasId" />
+          <ScalarProperty Name="TipoGastoId" ColumnName="TipoGastoId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipoGastos">
+      <EntityTypeMapping TypeName="IsTypeOf(HmoneyModel.TipoGasto)">
+        <MappingFragment StoreEntitySet="TipoGastos">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="EsActivo" ColumnName="EsActivo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
