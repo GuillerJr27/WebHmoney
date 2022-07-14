@@ -6,7 +6,7 @@
     <edmx:Diagrams>
       <Diagram DiagramId="fe3b49102bd047549c49510e6cc8d62c" Name="Diagram1" >
         <EntityTypeShape EntityType="HmoneyModel.Cuentas" Width="1.5" PointX="5.875" PointY="4.25" />
-        <EntityTypeShape EntityType="HmoneyModel.InformacionUsuario" Width="1.5" PointX="2.25" PointY="3.625" />
+        <EntityTypeShape EntityType="HmoneyModel.InformacionUsuario" Width="2.25" PointX="2.25" PointY="3.625" />
         <EntityTypeShape EntityType="HmoneyModel.Movimiento" Width="1.5" PointX="5.625" PointY="1" />
         <EntityTypeShape EntityType="HmoneyModel.TipoGasto" Width="1.5" PointX="8.875" PointY="1.625" />
         <AssociationConnector Association="HmoneyModel.InformacionUsuarioCuentas" />

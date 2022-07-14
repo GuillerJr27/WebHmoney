@@ -2,13 +2,13 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 07/12/2022 23:30:10
+-- Date Created: 07/13/2022 15:49:23
 -- Generated from EDMX file: C:\Users\Guillermo Peralta\source\repos\WebHmoney\WebHmoney\Models\HmoneyModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
 GO
-USE [Hmoney];
+USE [WebHmoney];
 GO
 IF SCHEMA_ID(N'dbo') IS NULL EXECUTE(N'CREATE SCHEMA [dbo]');
 GO
@@ -17,11 +17,11 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[FK_CuentasMovimiento]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Movimientos] DROP CONSTRAINT [FK_CuentasMovimiento];
-GO
 IF OBJECT_ID(N'[dbo].[FK_InformacionUsuarioCuentas]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Cuentas] DROP CONSTRAINT [FK_InformacionUsuarioCuentas];
+GO
+IF OBJECT_ID(N'[dbo].[FK_CuentasMovimiento]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Movimientos] DROP CONSTRAINT [FK_CuentasMovimiento];
 GO
 IF OBJECT_ID(N'[dbo].[FK_TipoGastoMovimiento]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Movimientos] DROP CONSTRAINT [FK_TipoGastoMovimiento];
@@ -55,7 +55,8 @@ CREATE TABLE [dbo].[Cuentas] (
     [TipoCuenta] nvarchar(max)  NOT NULL,
     [Moneda] nvarchar(max)  NOT NULL,
     [BalanceInicial] decimal(18,0)  NOT NULL,
-    [InformacionUsuarioId] int  NOT NULL
+    [InformacionUsuarioId] int  NOT NULL,
+    [FechaRegistro] datetime  NOT NULL
 );
 GO
 

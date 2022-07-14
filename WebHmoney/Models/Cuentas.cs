@@ -26,6 +26,7 @@ namespace WebHmoney.Models
         public string Moneda { get; set; }
         public decimal BalanceInicial { get; set; }
         public int InformacionUsuarioId { get; set; }
+        public System.DateTime FechaRegistro { get; set; }
     
         public virtual InformacionUsuario InformacionUsuario { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

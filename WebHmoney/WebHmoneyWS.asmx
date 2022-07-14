@@ -1,1 +1,1 @@
-﻿<%@ WebService Language="C#" CodeBehind="WebHmoneyWS.asmx.cs" Class="WebHmoney.WebHmoneyWS" %>
+﻿<%@ WebService Language="C#" CodeBehind="WEBHmoneyWS.asmx.cs" Class="WebHmoney.WebHmoneyWS" %>

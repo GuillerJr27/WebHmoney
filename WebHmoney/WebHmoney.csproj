@@ -212,8 +212,8 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="WebHmoneyWS.asmx.cs">
-      <DependentUpon>WebHmoneyWS.asmx</DependentUpon>
+    <Compile Include="WEBHmoneyWS.asmx.cs">
+      <DependentUpon>WEBHmoneyWS.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
   </ItemGroup>
@@ -239,7 +239,7 @@
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="WebHmoneyWS.asmx" />
+    <Content Include="WEBHmoneyWS.asmx" />
     <EntityDeploy Include="Models\HmoneyModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>HmoneyModel.Designer.cs</LastGenOutput>

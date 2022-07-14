@@ -18,7 +18,7 @@ namespace WebHmoney
     [System.ComponentModel.ToolboxItem(false)]
     // Para permitir que se llame a este servicio web desde un script, usando ASP.NET AJAX, quite la marca de comentario de la línea siguiente. 
     // [System.Web.Script.Services.ScriptService]
-    public class WebHmoneyWS : System.Web.Services.WebService
+    public class WEBHmoneyWS : System.Web.Services.WebService
     {
 
         ApplicationDbContext context = new ApplicationDbContext();
@@ -35,6 +35,7 @@ namespace WebHmoney
             cuenta.TipoCuenta = TipoCuenta;
             cuenta.Moneda = Moneda;
             cuenta.BalanceInicial = BalanceInicial;
+            cuenta.FechaRegistro = DateTime.Now;
 
             db.Cuentas.Add(cuenta);
             db.SaveChanges();
@@ -55,6 +56,7 @@ namespace WebHmoney
                 TipoCuenta = c.TipoCuenta,
                 Moneda = c.Moneda,
                 BalanceInicial = c.BalanceInicial,
+                FechaRegistro = c.FechaRegistro,
 
             }).ToList();
 
@@ -67,6 +69,7 @@ namespace WebHmoney
             public string TipoCuenta { get; set; }
             public string Moneda { get; set; }
             public decimal BalanceInicial { get; set; }
+            public System.DateTime FechaRegistro { get; set; }
         }
 
 
@@ -114,9 +117,9 @@ namespace WebHmoney
         {
             Movimiento movimiento = new Movimiento();
 
-            movimiento.Fecha = DateTime.Now;
             movimiento.Descripcion = Descripcion;
             movimiento.Monto = Monto;
+            movimiento.Fecha = DateTime.Now;
 
             db.Movimientos.Add(movimiento);
             db.SaveChanges();
@@ -133,9 +136,9 @@ namespace WebHmoney
             {
 
                 Id = m.Id,
-                Fecha = DateTime.Now,
                 Descripcion = m.Descripcion,
                 Monto = m.Monto,
+                Fecha = DateTime.Now,
 
             }).ToList();
 
@@ -144,9 +147,9 @@ namespace WebHmoney
         public class MovimientoWS
         {
             public int Id { get; set; }
-            public System.DateTime Fecha { get; set; }
             public string Descripcion { get; set; }
             public decimal Monto { get; set; }
+            public System.DateTime Fecha { get; set; }
         }
 
 
